@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+{% block title %}All Books - Booky{% endblock %}
+{% block content %}
+<div class="d-flex justify-content-between align-items-center mb-3">
+    <h1>Books</h1>
+    <a class="btn btn-success" href="{{ url_for('main.create_book') }}">+ Add Book</a>
+</div>
+
+{% if books %}
+<div class="list-group">
+    {% for book in books %}
+    <a href="{{ url_for('main.book_detail', book_id=book.id) }}" class="list-group-item list-group-item-action">
+        <div class="d-flex w-100 justify-content-between">
+            <h5 class="mb-1">{{ book.title }}</h5>
+            <small class="text-muted">{{ book.created_at.strftime('%Y-%m-%d') }}</small>
+        </div>
+        <p class="mb-1">By {{ book.author }}</p>
+        {% if book.rating is not none %}
+        <small class="text-muted">Rating: {{ book.rating }}/10</small>
+        {% endif %}
+    </a>
+    {% endfor %}
+</div>
+{% else %}
+<p class="text-muted">No books yet — add one!</p>
+{% endif %}
+{% endblock %}

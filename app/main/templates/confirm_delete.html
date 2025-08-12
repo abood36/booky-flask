@@ -1,0 +1,12 @@
+{% extends "base.html" %}
+{% block title %}Delete {{ book.title }} - Booky{% endblock %}
+{% block content %}
+<h2>Delete Book</h2>
+<p>Are you sure you want to delete <strong>{{ book.title }}</strong> by {{ book.author }}?</p>
+<form method="POST">
+    {{ form.hidden_tag() }}
+    {{ form.submit(class="btn btn-danger") }}
+    <!-- <button type="submit" class="btn btn-danger">Yes, delete</button> -->
+    <a class="btn btn-secondary" href="{{ url_for('main.book_detail', book_id=book.id) }}">Cancel</a>
+</form>
+{% endblock %}

@@ -1,0 +1,43 @@
+{% extends "base.html" %}
+{% block title %}{{ form_action }} Book - Booky{% endblock %}
+{% block content %}
+<h2>{{ form_action }} Book</h2>
+<form method="POST" novalidate>
+    {{ form.hidden_tag() }}
+
+    <div class="mb-3">
+        {{ form.title.label(class="form-label") }}
+        {{ form.title(class="form-control", placeholder="Book title") }}
+        {% for err in form.title.errors %}
+        <div class="text-danger small">{{ err }}</div>
+        {% endfor %}
+    </div>
+
+    <div class="mb-3">
+        {{ form.author.label(class="form-label") }}
+        {{ form.author(class="form-control", placeholder="Author name") }}
+        {% for err in form.author.errors %}
+        <div class="text-danger small">{{ err }}</div>
+        {% endfor %}
+    </div>
+
+    <div class="mb-3">
+        {{ form.description.label(class="form-label") }}
+        {{ form.description(class="form-control", rows="4") }}
+        {% for err in form.description.errors %}
+        <div class="text-danger small">{{ err }}</div>
+        {% endfor %}
+    </div>
+
+    <div class="mb-3">
+        {{ form.rating.label(class="form-label") }}
+        {{ form.rating(class="form-control", placeholder="0-10") }}
+        {% for err in form.rating.errors %}
+        <div class="text-danger small">{{ err }}</div>
+        {% endfor %}
+    </div>
+
+    <button class="btn btn-success" type="submit">{{ form.submit.label.text }}</button>
+    <a class="btn btn-secondary" href="{{ url_for('main.index') }}">Cancel</a>
+</form>
+{% endblock %}

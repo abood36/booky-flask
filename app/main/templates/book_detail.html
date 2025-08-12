@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+{% block title %}{{ book.title }} - Booky{% endblock %}
+{% block content %}
+<h2>{{ book.title }}</h2>
+<p class="text-muted">By {{ book.author }} — {{ book.created_at.strftime('%Y-%m-%d') }}</p>
+{% if book.rating is not none %}
+<p>Rating: <strong>{{ book.rating }}/10</strong></p>
+{% endif %}
+{% if book.description %}
+<div class="card mb-3">
+    <div class="card-body">{{ book.description }}</div>
+</div>
+{% endif %}
+<a class="btn btn-primary" href="{{ url_for('main.edit_book', book_id=book.id) }}">Edit</a>
+<a class="btn btn-danger" href="{{ url_for('main.delete_book', book_id=book.id) }}">Delete</a>
+<a class="btn btn-secondary" href="{{ url_for('main.index') }}">Back</a>
+{% endblock %}
